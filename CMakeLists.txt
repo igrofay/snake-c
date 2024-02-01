@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.27)
+project(untitled C)
+
+set(CMAKE_C_STANDARD 17)
+
+add_executable(untitled main.c utils.h
+        node.c
+        node.h
+        threads.h
+)

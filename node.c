@@ -69,3 +69,12 @@ void deleteEnd(struct Node** startingNode){
     free(current);
     prev->next = NULL;
 }
+
+int contains(struct Node* node, struct Point point){
+    struct Node* current = node;
+    while (current->next != NULL){
+        if(current->point.y == point.y && current->point.x == point.x) return 1;
+        current = current->next;
+    }
+    return 0;
+}

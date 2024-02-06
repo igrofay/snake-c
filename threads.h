@@ -12,7 +12,7 @@
     #define threadFunctionReturnType void*
     #define createThreadFunction(func) pthread_create(&thread, NULL, func, NULL)
     #define joinThreadFunction(thread) pthread_join(thread, NULL)
-    #define closeThreadHandle(thread) // No need to close thread handle on POSIX
+    #define closeThreadHandle(thread) pthread_cancel(thread)
     #define initializeMutex(mutex) pthread_mutex_init(&mutex, NULL)
     #define lockMutex(mutex) pthread_mutex_lock(&mutex)
     #define unlockMutex(mutex) pthread_mutex_unlock(&mutex)

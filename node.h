@@ -16,5 +16,5 @@ void appendToStartNode(struct Node** startingNode, int yPoint, int xPoint);
 void appendToEndNode(struct Node** startingNode, int yPoint, int xPoint);
 void deleteStart(struct Node** startingNode);
 void deleteEnd(struct Node** startingNode);
-
+int contains(struct Node* node, struct Point point);
 #endif //UNTITLED_NODE_H

@@ -11,7 +11,7 @@
 
 Mutex mutex;
 char map[Height][Width];
-struct Point food = { .x=5, .y = 5};
+struct Point food;
 struct Node* snake;
 volatile struct Point move = {.y = 1, .x = 0};
 int points = 0;
@@ -19,7 +19,7 @@ boolean isGame = 1;
 void clearMap(){
     for(int h = 0; h<Height; h++){
         for(int w = 0; w<Width; w++){
-            map[h][w] = '*';
+            map[h][w] = '.';
         }
     }
 }
@@ -52,6 +52,10 @@ void eventsOnMap(){
     if (snake->point.y == food.y && snake->point.x == food.x){
         food.y = random(Height);
         food.x = random(Width);
+        while (contains(snake, food)){
+            food.y = random(Height);
+            food.x = random(Width);
+        }
         points++;
     } else{
         deleteEnd(&snake);
@@ -65,7 +69,7 @@ void eventsOnMap(){
     map[food.y][food.y]= '@';
     CLEAR_SCREEN;
     printMap();
-    sleepMs(200);
+    sleepMs(250);
 }
 threadFunctionReturnType thReceivingPlayerClicks(void* arg){
     while (1){
@@ -107,7 +111,9 @@ int main() {
     initializeMutex(mutex);
     Thread  thread;
     createThreadFunction(thReceivingPlayerClicks);
-    snake = createNode(7,7);
+    snake = createNode(random(Height),random(Height));
+    food.y= random(Height);
+    food.x = random(Height);
     while (isGame){
         eventsOnMap();
     }
